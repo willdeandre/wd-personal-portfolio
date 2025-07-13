@@ -1,11 +1,22 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
+  /* Your color palette */
+  --honeydew: #E5F4E3;
+  --argentinian-blue: #5DA9E9;
+  --marian-blue: #003F91;
+  --white: #FFFFFF;
+  --finn: #6D326D;
+  
+  /* Light mode assignments */
+  --background: var(--honeydew);
   --foreground: #171717;
-}
-
-@theme inline {
+  --primary: var(--marian-blue);
+  --secondary: var(--argentinian-blue);
+  --accent: var(--finn);
+  --muted: var(--honeydew);
+  
+  /* Keep your existing variables */
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
@@ -16,11 +27,121 @@
   :root {
     --background: #0a0a0a;
     --foreground: #ededed;
+    --muted: #1a1a1a;
   }
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  line-height: 1.25;
+  font-weight: 600;
+  margin-bottom: 0.5em;
+}
+
+p {
+  margin-bottom: 1rem;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+  transition: opacity 0.2s ease;
+}
+
+a:hover {
+  opacity: 0.8;
+}
+
+/* Utility classes for your color palette */
+.text-primary { color: var(--primary); }
+.text-secondary { color: var(--argentinian-blue); }
+.text-accent { color: var(--finn); }
+.bg-primary { background-color: var(--primary); }
+.bg-secondary { background-color: var(--argentinian-blue); }
+.bg-accent { background-color: var(--finn); }
+.bg-muted { background-color: var(--muted); }
+
+/* Diagonal stripes pattern - renamed for consistency */
+.diagonal-hover:hover {
+  background-image:
+    repeating-linear-gradient(
+      45deg,
+      transparent,
+      transparent 8px,
+      rgba(255,255,255,0.1) 8px,
+      rgba(255,255,255,0.1) 10px
+    );
+  background-color: rgb(55, 65, 81) !important;
+  transition: background-image 0.3s ease !important;
+  opacity: 1 !important;
+}
+
+/* Remove the ::before pseudo-element since we don't need it for stripes */
+.diagonal-hover:hover::before {
+  display: none;
+}
+
+/* Court Border Drawing Animation */
+.photo-container-court {
+  width: 280px;
+  height: 420px;
+  position: relative;
+  border-radius: 16px;
+  overflow: hidden;
+  cursor: pointer;
+  background: #003F91;
+  padding: 10px;
+}
+
+.photo-container-court::before {
+  content: '';
+  position: absolute;
+  top: -4px;
+  left: -4px;
+  right: -4px;
+  bottom: -4px;
+  border: 3px solid transparent;
+  border-radius: 20px;
+  background:
+    linear-gradient(#FFFFFF, #FFFFFF) padding-box,
+    linear-gradient(45deg, #ff6b35 0%, #ff6b35 25%, transparent 25%, transparent 75%, #ff6b35 75%) border-box;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: -1;
+}
+
+.photo-container-court:hover::before {
+  opacity: 1;
+  animation: draw-court-lines 2s ease-in-out;
+}
+
+@keyframes draw-court-lines {
+  0% {
+    clip-path: polygon(0 0, 0 0, 0 0, 0 0);
+  }
+  25% {
+    clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
+  }
+  50% {
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 100% 100%);
+  }
+  75% {
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+  }
+  100% {
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+  }
 }

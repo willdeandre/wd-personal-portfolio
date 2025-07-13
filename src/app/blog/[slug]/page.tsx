@@ -6,7 +6,7 @@ import matter from "gray-matter";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import Link from "next/link";
 import { Metadata } from "next";
-import { ArrowLeft, Calendar, Clock, Share2, BookOpen } from "lucide-react";
+import { ArrowLeft, Calendar, Clock, BookOpen } from "lucide-react";
 
 interface BlogPostProps {
   params: Promise<{ slug: string }>;

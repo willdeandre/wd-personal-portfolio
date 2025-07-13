@@ -9,9 +9,7 @@ import { Metadata } from "next";
 import { ArrowLeft, Calendar, Clock, Share2, BookOpen } from "lucide-react";
 
 interface BlogPostProps {
-  params: {
-    slug: string;
-  };
+  params: Promise<{ slug: string }>;
 }
 
 interface BlogPostData {
@@ -123,7 +121,8 @@ function calculateReadTime(content: string): number {
 // Generate metadata for SEO
 export async function generateMetadata({ params }: BlogPostProps): Promise<Metadata> {
   try {
-    const filePath = path.join(process.cwd(), "content/blog", `${params.slug}.mdx`);
+    const { slug } = await params; // Fixed: await params first
+    const filePath = path.join(process.cwd(), "content/blog", `${slug}.mdx`);
     const source = fs.readFileSync(filePath, "utf8");
     const { data } = matter(source);
     const typedData = data as BlogPostData;
@@ -151,7 +150,7 @@ export async function generateMetadata({ params }: BlogPostProps): Promise<Metad
 }
 
 export default async function BlogPost({ params }: BlogPostProps) {
-  const { slug } = params;
+  const { slug } = await params;
   
   try {
     const filePath = path.join(process.cwd(), "content/blog", `${slug}.mdx`);

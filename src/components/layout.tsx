@@ -4,6 +4,19 @@ import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from 'next/navigation';
 
+// Helper function to find current page index with sub-route support
+function findCurrentPageIndex(pathname: string, allPages: Array<{path: string, label: string}>): number {
+  // First try exact match
+  const exactMatch = allPages.findIndex(page => page.path === pathname);
+  if (exactMatch !== -1) return exactMatch;
+  
+  // Then try sub-route match (e.g., /blog/post should match /blog)
+  const subRouteMatch = allPages.findIndex(page => 
+    page.path !== '/' && pathname.startsWith(page.path + '/')
+  );
+  return subRouteMatch;
+}
+
 // 1) Container: constrains content width & adds side padding
 export function Container({ children }: { children: React.ReactNode }) {
   return (
@@ -33,6 +46,7 @@ export function Header() {
 // 3) Left Sidebar - breadcrumb trail (where you've been)
 export function Sidebar() {
   const pathname = usePathname();
+  
   const getVisitedPages = (currentPath: string) => {
     const allPages = [
       { path: '/', label: 'Home' },
@@ -41,25 +55,35 @@ export function Sidebar() {
       { path: '/blog', label: 'Blog' },
       { path: '/media', label: 'Media' }
     ];
-    const currentIndex = allPages.findIndex(page => page.path === currentPath);
+    
+    const currentIndex = findCurrentPageIndex(currentPath, allPages);
     if (currentIndex === -1) return [allPages[0]];
     return allPages.slice(0, currentIndex + 1);
   };
+  
   const visitedPages = getVisitedPages(pathname);
+  
   return (
     <div className="fixed left-0 top-0 h-screen flex z-50">
       {/* Full-height navigation tabs */}
       <div className="flex h-screen">
-        {visitedPages.map((page) => (
-          <Link key={page.path} href={page.path}>
-            <div className={`h-full w-14 flex items-center justify-center transition-colors diagonal-hover ${pathname === page.path ? 'bg-primary' : 'bg-gray-700'
+        {visitedPages.map((page) => {
+          // Determine if this page is currently active
+          const isActive = pathname === page.path || 
+            (page.path !== '/' && pathname.startsWith(page.path + '/'));
+          
+          return (
+            <Link key={page.path} href={page.path}>
+              <div className={`h-full w-14 flex items-center justify-center transition-colors diagonal-hover ${
+                isActive ? 'bg-primary' : 'bg-gray-700'
               }`}>
-              <span className="text-white text-sm font-medium transform -rotate-90 whitespace-nowrap">
-                {page.label}
-              </span>
-            </div>
-          </Link>
-        ))}
+                <span className="text-white text-sm font-medium transform -rotate-90 whitespace-nowrap">
+                  {page.label}
+                </span>
+              </div>
+            </Link>
+          );
+        })}
       </div>
     </div>
   );
@@ -68,6 +92,7 @@ export function Sidebar() {
 // 4) Right Navigation - next pages (where you can go)
 export function RightNav() {
   const pathname = usePathname();
+  
   const getNextPages = (currentPath: string) => {
     const allPages = [
       { path: '/', label: 'Home' },
@@ -76,11 +101,14 @@ export function RightNav() {
       { path: '/blog', label: 'Blog' },
       { path: '/media', label: 'Media' }
     ];
-    const currentIndex = allPages.findIndex(page => page.path === currentPath);
+    
+    const currentIndex = findCurrentPageIndex(currentPath, allPages);
     if (currentIndex === -1) return allPages.slice(1);
     return allPages.slice(currentIndex + 1);
   };
+  
   const nextPages = getNextPages(pathname);
+  
   return (
     <div className="fixed right-0 top-0 h-screen flex z-50">
       <div className="flex h-full">
@@ -133,7 +161,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
     { path: '/media', label: 'Media' }
   ];
 
-  const currentIndex = allPages.findIndex(page => page.path === pathname);
+  const currentIndex = findCurrentPageIndex(pathname, allPages);
   const leftTabs = currentIndex === -1 ? 1 : currentIndex + 1;
   const rightTabs = currentIndex === -1 ? 4 : allPages.length - currentIndex - 1;
 

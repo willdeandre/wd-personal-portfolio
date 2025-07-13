@@ -44,7 +44,7 @@ const components = {
     </p>
   ),
   img: ({ src, alt }: { src: string; alt: string }) => (
-    <figure className="my-12">
+    <div className="my-12">
       <div className="relative overflow-hidden rounded-2xl shadow-2xl bg-gradient-to-br from-slate-50 to-slate-100 p-2">
         <img
           src={src}
@@ -53,11 +53,11 @@ const components = {
         />
       </div>
       {alt && (
-        <figcaption className="text-center text-sm text-slate-500 mt-4 italic font-medium">
+        <div className="text-center text-sm text-slate-500 mt-4 italic font-medium">
           {alt}
-        </figcaption>
+        </div>
       )}
-    </figure>
+    </div>
   ),
   a: ({ href, children }: { href: string; children: React.ReactNode }) => (
     <a
@@ -78,8 +78,16 @@ const components = {
     <em className="italic text-slate-700 font-medium">{children}</em>
   ),
   blockquote: ({ children }: { children: React.ReactNode }) => (
-    <blockquote className="relative border-l-4 border-blue-500 pl-8 my-10 italic text-slate-700 bg-gradient-to-r from-blue-50 to-indigo-50 py-6 rounded-r-xl shadow-sm">
-      <div className="absolute -left-2 top-4 w-4 h-4 bg-blue-500 rounded-full"></div>
+    <blockquote
+      className="border-t-4 border-b-4 border-slate-800 py-6 my-8 text-center font-serif italic text-slate-800 bg-slate-50"
+      style={{
+        '--font-size': '3rem',
+        '--line-height': '3.5rem',
+        fontSize: 'var(--font-size) !important',
+        lineHeight: 'var(--line-height) !important',
+        fontWeight: '500'
+      } as React.CSSProperties}
+    >
       {children}
     </blockquote>
   ),
@@ -151,7 +159,7 @@ export async function generateMetadata({ params }: BlogPostProps): Promise<Metad
 
 export default async function BlogPost({ params }: BlogPostProps) {
   const { slug } = await params;
-  
+
   try {
     const filePath = path.join(process.cwd(), "content/blog", `${slug}.mdx`);
     const source = fs.readFileSync(filePath, "utf8");
@@ -162,12 +170,12 @@ export default async function BlogPost({ params }: BlogPostProps) {
     const publishDate = new Date(typedData.date);
 
     return (
-      <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-blue-50">
-        <div className="max-w-2xl mx-auto py-8 px-6">
+      <div className="min-h-screen bg-honeydew">
+        <div className="max-w-4xl mx-auto py-8 px-6 pl-48">
           {/* Navigation */}
           <nav className="mb-12">
-            <Link 
-              href="/blog" 
+            <Link
+              href="/blog"
               className="inline-flex items-center gap-2 text-slate-600 hover:text-blue-600 transition-colors duration-200 font-medium group"
             >
               <ArrowLeft className="w-4 h-4 transition-transform group-hover:-translate-x-1" />
@@ -196,7 +204,7 @@ export default async function BlogPost({ params }: BlogPostProps) {
                 })}
               </div>
             </div>
-            
+
             {/* Title */}
             <h1 className="text-4xl md:text-6xl font-extrabold bg-gradient-to-r from-slate-900 via-blue-800 to-indigo-900 bg-clip-text text-transparent mb-8 leading-tight">
               {typedData.title}
@@ -208,7 +216,7 @@ export default async function BlogPost({ params }: BlogPostProps) {
                 {typedData.description}
               </p>
             )}
-            
+
           </header>
 
           {/* Article Content */}
@@ -217,46 +225,6 @@ export default async function BlogPost({ params }: BlogPostProps) {
               <MDXRemote source={content} components={components} />
             </div>
           </article>
-
-          {/* Share Section */}
-          <div className="mt-16 p-8 bg-gradient-to-r from-blue-50 to-indigo-50 rounded-3xl border border-blue-100">
-            <div className="flex items-center justify-between flex-wrap gap-6">
-              <div>
-                <h3 className="text-xl font-bold text-slate-900 mb-2">Share this analysis</h3>
-                <p className="text-slate-600">Found this insightful? Share it with fellow basketball enthusiasts.</p>
-              </div>
-              <button className="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-xl font-semibold transition-colors duration-200 shadow-lg hover:shadow-xl">
-                <Share2 className="w-4 h-4" />
-                Share
-              </button>
-            </div>
-          </div>
-
-          {/* Call to Action Footer */}
-          <footer className="mt-16">
-            <div className="bg-gradient-to-r from-slate-900 to-blue-900 rounded-3xl p-8 md:p-12 text-center text-white shadow-2xl">
-              <div className="max-w-2xl mx-auto">
-                <h3 className="text-3xl font-bold mb-4">Ready for more insights?</h3>
-                <p className="text-blue-100 mb-8 text-lg leading-relaxed">
-                  Dive deeper into basketball analytics with data-driven analysis that goes beyond the surface stats.
-                </p>
-                <div className="flex flex-col sm:flex-row justify-center gap-4">
-                  <Link 
-                    href="/blog" 
-                    className="bg-white text-slate-900 px-8 py-4 rounded-xl font-bold hover:bg-blue-50 transition-colors duration-200 shadow-lg hover:shadow-xl"
-                  >
-                    Explore More Posts
-                  </Link>
-                  <Link 
-                    href="/about" 
-                    className="bg-transparent border-2 border-white text-white px-8 py-4 rounded-xl font-bold hover:bg-white hover:text-slate-900 transition-colors duration-200"
-                  >
-                    About Will
-                  </Link>
-                </div>
-              </div>
-            </div>
-          </footer>
         </div>
       </div>
     );

@@ -102,14 +102,31 @@ export default function About() {
               style={{
                 width: '280px',
                 height: '420px',
-                background: '#003F91',
+                background: 'linear-gradient(135deg, #003F91 0%, #5DA9E9 50%, #6D326D 100%)',
                 padding: '10px',
               }}
             >
+              {/* Corner frame accents */}
+              <div className="absolute inset-0 overflow-hidden">
+                {/* Top corners */}
+                <div className="absolute top-3 left-3 w-8 h-8 border-l-3 border-t-3 border-white/60"></div>
+                <div className="absolute top-3 right-3 w-8 h-8 border-r-3 border-t-3 border-white/60"></div>
+                
+                {/* Bottom corners */}
+                <div className="absolute bottom-3 left-3 w-8 h-8 border-l-3 border-b-3 border-white/60"></div>
+                <div className="absolute bottom-3 right-3 w-8 h-8 border-r-3 border-b-3 border-white/60"></div>
+                
+                {/* Small decorative squares */}
+                <div className="absolute top-16 left-6 w-3 h-3 bg-white/40"></div>
+                <div className="absolute top-16 right-6 w-3 h-3 bg-white/40"></div>
+                <div className="absolute bottom-16 left-6 w-3 h-3 bg-white/40"></div>
+                <div className="absolute bottom-16 right-6 w-3 h-3 bg-white/40"></div>
+              </div>
+              
               <img
                 src="/IMG_5034.png"
                 alt="Will DeAndre"
-                className="w-full h-full object-cover rounded-lg"
+                className="relative z-10 w-full h-full object-cover rounded-lg"
               />
             </div>
 

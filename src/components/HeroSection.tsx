@@ -1,10 +1,9 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { ArrowRight, Linkedin, Mail, ExternalLink, ChevronDown } from 'lucide-react';
+import { ArrowRight, Mail, ExternalLink, ChevronDown } from 'lucide-react';
 
 export default function Home() {
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [isLoaded, setIsLoaded] = useState(false);
 
   const featuredProjects = [
@@ -24,11 +23,6 @@ export default function Home() {
 
   useEffect(() => {
     setIsLoaded(true);
-    const handleMouseMove = (e: MouseEvent) => {
-      setMousePosition({ x: e.clientX, y: e.clientY });
-    };
-    window.addEventListener('mousemove', handleMouseMove);
-    return () => window.removeEventListener('mousemove', handleMouseMove);
   }, []);
 
   return (
@@ -149,11 +143,11 @@ export default function Home() {
         <div className="container mx-auto px-6 text-center">
           <h2 className="text-5xl font-bold mb-4">
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-white to-white">
-              Let's Connect!
+              Let&apos;s Connect!
             </span>
           </h2>
           <p className="text-white text-center mb-12 text-lg max-w-2xl mx-auto">
-            Ready to discuss basketball analytics, CBA insights, or potential collaborations? I'd love to hear from you.
+            Ready to discuss basketball analytics, CBA insights, or potential collaborations? I&apos;d love to hear from you.
           </p>
 
           <div className="flex justify-center gap-6">

@@ -67,22 +67,6 @@ const instagrams = [
   },
 ];
 
-const FlipCard = ({ children, link }) => {
-  return (
-    <a
-      href={link}
-      target="_blank"
-      rel="noopener noreferrer"
-      className="flip-card-container block"
-    >
-      <div className="flip-card">
-        {children}
-      </div>
-    </a>
-  );
-};
-
-
 export default function MediaPage() {
   return (
     <div className="min-h-screen" style={{ backgroundColor: '#E5F4E3' }}>

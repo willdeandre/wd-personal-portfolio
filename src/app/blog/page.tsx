@@ -4,7 +4,7 @@ import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
 import { Metadata } from "next";
-import { Clock, Calendar, BookOpen, TrendingUp, Star, ArrowRight } from "lucide-react";
+import { Clock, Calendar, BookOpen, Star, ArrowRight } from "lucide-react";
 import { Suspense } from "react";
 
 interface PostMeta {

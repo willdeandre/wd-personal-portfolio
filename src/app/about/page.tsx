@@ -1,5 +1,4 @@
 import React from 'react';
-import { Metadata } from 'next';
 import { ChevronDown } from 'lucide-react';
 
 export default function About() {

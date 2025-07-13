@@ -163,7 +163,7 @@ export default function Projects() {
                 </a>
               </div>
               <p className="text-gray-600 leading-relaxed">
-                This is what you're looking at. I wanted this portfolio to be a project in itself, so I decided to fully program it from scratch. No Wix, no WordPress, no Squarespace. The design isn't perfect, but I think the website is pretty cool as a whole. Plus, it shows my work, which at the end of the day is all that really matters. I hope you like it.
+                This is what you&apos;re looking at. I wanted this portfolio to be a project in itself, so I decided to fully program it from scratch. No Wix, no WordPress, no Squarespace. The design isn&apos;t perfect, but I think the website is pretty cool as a whole. Plus, it shows my work, which at the end of the day is all that really matters. I hope you like it.
               </p>
             </div>
             <div className="px-8 pt-0 pb-8">

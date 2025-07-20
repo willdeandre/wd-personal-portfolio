@@ -11,9 +11,10 @@ interface PostMeta {
   slug: string;
   title: string;
   date: string;
-  excerpt: string;
   readTime: number;
   description?: string;
+  excerpt?: string;
+  coverImage?: string;
   tags?: string[];
   featured?: boolean;
 }
@@ -22,6 +23,8 @@ interface BlogData {
   title: string;
   date: string;
   description?: string;
+  excerpt?: string;
+  coverImage?: string;
   tags?: string[];
   featured?: boolean;
 }
@@ -193,7 +196,6 @@ export default function BlogIndex() {
           const source = fs.readFileSync(filePath, "utf8");
           const { data, content } = matter(source);
           const typedData = data as BlogData;
-          
           const excerpt = generateExcerpt(content);
           const readTime = calculateReadTime(content);
           
@@ -201,9 +203,10 @@ export default function BlogIndex() {
             slug, 
             title: typedData.title || 'Untitled', 
             date: typedData.date || new Date().toISOString(),
-            excerpt,
             readTime,
             description: typedData.description,
+            excerpt: typedData.excerpt ?? generateExcerpt(content),
+            coverImage: typedData.coverImage,
             tags: typedData.tags,
             featured: typedData.featured
           } as PostMeta;

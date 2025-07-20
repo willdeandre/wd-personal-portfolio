@@ -70,7 +70,7 @@ const components = {
     </a>
   ),
   strong: ({ children }: { children: React.ReactNode }) => (
-    <strong className="font-bold text-slate-900 bg-yellow-50 px-1 rounded">
+    <strong className="font-bold text-slate-900 px-1 rounded">
       {children}
     </strong>
   ),

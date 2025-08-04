@@ -45,20 +45,6 @@ export const metadata: Metadata = {
   },
 };
 
-// Utility function to generate excerpt
-function generateExcerpt(content: string, length: number = 180): string {
-  const cleaned = content
-    .replace(/[#*`]/g, '')
-    .replace(/\n/g, ' ')
-    .trim();
-  
-  if (cleaned.length <= length) return cleaned;
-  
-  const truncated = cleaned.substring(0, length);
-  const lastSpace = truncated.lastIndexOf(' ');
-  return (lastSpace > 0 ? truncated.substring(0, lastSpace) : truncated) + '...';
-}
-
 // Utility function to calculate reading time
 function calculateReadTime(content: string): number {
   const wordsPerMinute = 200;
@@ -196,7 +182,6 @@ export default function BlogIndex() {
           const source = fs.readFileSync(filePath, "utf8");
           const { data, content } = matter(source);
           const typedData = data as BlogData;
-          const excerpt = generateExcerpt(content);
           const readTime = calculateReadTime(content);
           
           return { 
@@ -205,7 +190,7 @@ export default function BlogIndex() {
             date: typedData.date || new Date().toISOString(),
             readTime,
             description: typedData.description,
-            excerpt: typedData.excerpt ?? generateExcerpt(content),
+            excerpt: typedData.excerpt || 'No excerpt provided',
             coverImage: typedData.coverImage,
             tags: typedData.tags,
             featured: typedData.featured

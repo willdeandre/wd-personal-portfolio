@@ -31,6 +31,56 @@ export default function Projects() {
 
         {/* Projects Container */}
         <div className="space-y-16">
+          {/* NBA Cap Sheets */}
+          <div className="bg-white rounded-xl shadow-sm border-2 border-primary overflow-hidden">
+            <div className="px-8 py-6 border-b border-gray-50">
+              <div className="flex justify-between items-start mb-3">
+                <h2 className="text-2xl font-medium text-gray-800">
+                  2026 Salary Cap Sheets
+                </h2>
+                <a
+                  href="/DeAndreCapSheets2026.xlsx"
+                  download
+                  className="group relative overflow-hidden bg-gray-700 text-white px-8 py-4 rounded-full font-semibold transition-all duration-300 hover:scale-105 hover:shadow-xl diagonal-hover"
+                >
+                  <span className="relative z-10 flex items-center gap-2 text-white">
+                    Download
+                    <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                  </span>
+                </a>
+              </div>
+              <p className="text-gray-600 leading-relaxed">
+                Cap sheets! This is a work in progress, but I wanted to make this Excel spreadsheet public in case people want to download and customize their own cap sheets. It currently features multi-year salary numbers, an auto-populating depth chart, a formula to quickly show users where a team is in relation to the cap, and hard cap information. Exceptions and picks will be the next thing I add!
+              </p>
+            </div>
+            <div className="px-8 pt-0 pb-8">
+              <a
+                href="/DeAndreCapSheets2026.xlsx"
+                download
+                className="relative w-full rounded-lg overflow-hidden shadow-sm block cursor-pointer"
+              >
+                <img
+                  src="/capthumbnail.png"
+                  alt="Cap Sheet Thumbnail"
+                  className="w-full h-auto"
+                />
+              </a>
+              <div className="flex flex-wrap gap-2 mt-6">
+                <span className="px-3 py-1 text-sm font-medium text-yellow-700 bg-yellow-50 rounded-full border border-yellow-100">
+                  Excel
+                </span>
+                <span className="px-3 py-1 text-sm font-medium text-green-700 bg-green-50 rounded-full border border-green-100">
+                  Data Scraping
+                </span>
+                <span className="px-3 py-1 text-sm font-medium text-purple-700 bg-purple-50 rounded-full border border-purple-100">
+                  CBA Rules
+                </span>
+                <span className="px-3 py-1 text-sm font-medium text-blue-700 bg-blue-50 rounded-full border border-blue-100">
+                  Interactive Tools
+                </span>
+              </div>
+            </div>
+          </div>
           {/* NBA Draft Visualizer */}
           <div className="bg-white rounded-xl shadow-sm border-2 border-primary overflow-hidden">
             <div className="px-8 py-6 border-b border-gray-50">
@@ -95,7 +145,7 @@ export default function Projects() {
                   InstaCourt
                 </h2>
                 <a
-                  href="https://instacourt-nkgbte2fd-wills-projects-d4e5eaf1.vercel.app"
+                  href="https://instacourt-live.vercel.app/"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="group relative overflow-hidden bg-gray-700 text-white px-8 py-4 rounded-full font-semibold transition-all duration-300 hover:scale-105 hover:shadow-xl diagonal-hover"

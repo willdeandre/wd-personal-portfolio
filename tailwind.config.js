@@ -10,10 +10,9 @@ module.exports = {
         "marian-blue": "#003F91",
         white: "#FFFFFF",
         finn: "#6D326D",
-
         // Semantic color assignments
         primary: "#003F91", // marian-blue
-        secondary: "#5DA9E9", // argentinian-blue  
+        secondary: "#5DA9E9", // argentinian-blue
         accent: "#6D326D", // finn
         background: "#FFFFFF", // white
         muted: "#E5F4E3", // honeydew
@@ -23,6 +22,7 @@ module.exports = {
         sans: ["var(--font-geist-sans)", "ui-sans-serif", "system-ui"],
         mono: ["var(--font-geist-mono)", "ui-monospace", "SFMono-Regular"],
         bebas: ["var(--font-bebas-neue)"],
+        jetbrains: ["var(--font-jetbrains-mono)", "ui-monospace", "SFMono-Regular"], // Add this line
       },
       spacing: {
         72: "18rem",

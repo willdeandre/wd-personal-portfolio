@@ -18,7 +18,7 @@ export default function Home() {
       description: "Intuitive game tracker with real-time advanced stats and interactive shot charts",
       tech: ["HTML/CSS/JS", "Sports Analytics", "Real-time Tracking"],
       url: "https://instacourt-nkgbte2fd-wills-projects-d4e5eaf1.vercel.app"
-    }
+    },
   ];
 
   useEffect(() => {
@@ -26,7 +26,7 @@ export default function Home() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-[#E5F4E3] text-[#003F91] overflow-hidden ml-0 mr-42">
+    <div className="min-h-screen bg-[#E5F4E3] text-[#003F91]">
       {/* Add custom CSS for diagonal hover effect */}
       <style jsx>{`
         .diagonal-hover:hover {
@@ -45,8 +45,8 @@ export default function Home() {
 
       {/* Hero Section */}
       <section className="relative min-h-screen flex items-center justify-center">
-        <div className="container mx-auto pl-8 pr-12 text-center">
-          <div className={`transition-all duration-1500 ${isLoaded ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
+        <div className="max-w-6xl mx-auto text-center">
+          <div className={`transition-all duration-[1500ms] ${isLoaded ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
             <h1 className="text-7xl lg:text-9xl font-geist mb-8 leading-none">
               <span className="block text-transparent bg-clip-text bg-gradient-to-r from-[#003F91] via-[#5DA9E9] to-[#6D326D]">
                 Will
@@ -56,7 +56,7 @@ export default function Home() {
               </span>
             </h1>
 
-            <p className="text-4xl text-primary mb-8 max-w-3xl mx-auto font-bold">
+            <p className="text-4xl text-primary mb-8 max-w-3xl mx-auto font-jetbrains">
               Basketball Strategist: Analytics and CBA
             </p>
 
@@ -93,23 +93,23 @@ export default function Home() {
 
       {/* Featured Work Section */}
       <section className="relative py-32 bg-[#E5F4E3]">
-        <div className="container mx-auto px-6">
+        <div className="max-w-6xl mx-auto px-6">
           <h2 className="text-5xl font-bold mb-4 text-center">
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#003F91] to-[#5DA9E9]">
               Featured Work
             </span>
           </h2>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 max-w-6xl mx-auto">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
             {featuredProjects.map((project, index) => (
               <div
                 key={index}
                 className="group relative overflow-hidden rounded-2xl bg-white border-2 border-black"
               >
-                <div className="aspect-video bg-gradient-to-br from-[#5DA9E9]/10 to-[#6D326D]/10 relative overflow-hidden">
+                <div className="h-64 bg-gradient-to-br from-[#5DA9E9]/10 to-[#6D326D]/10 relative overflow-hidden">
                   <div className="absolute inset-0 bg-white" />
                   <div className="absolute inset-6 flex flex-col justify-end pb-4">
-                    <h3 className="text-2xl font-bold mb-2 text-[#003F91]">{project.title}</h3>
+                    <h3 className="text-2xl font-bold mb-2 text-[#003F91] text-center">{project.title}</h3>
                     <p className="text-[#003F91]/70 mb-4">{project.description}</p>
                     <a
                       href={project.url}
@@ -139,8 +139,8 @@ export default function Home() {
       </section>
 
       {/* Contact Section */}
-      <section className="relative py-32 bg-primary">
-        <div className="container mx-auto px-6 text-center">
+      <section className="relative py-32 bg-[#5DA9E9]">
+        <div className="max-w-6xl mx-auto px-6 text-center">
           <h2 className="text-5xl font-bold mb-4">
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-white to-white">
               Let&apos;s Connect!

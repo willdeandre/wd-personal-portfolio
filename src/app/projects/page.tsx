@@ -23,7 +23,7 @@ export default function Projects() {
       <div className="max-w-2xl mx-auto py-8 px-6">
         {/* Header Section */}
         <div className="text-center mb-12">
-          <h1 className="text-4xl font-light text-gray-800 mb-3">
+          <h1 className="text-6xl font-light text-gray-800 mb-3 font-inter">
             Projects
           </h1>
           <div className="w-16 h-0.5 bg-gray-400 mx-auto"></div>
@@ -162,7 +162,7 @@ export default function Projects() {
             </div>
             <div className="px-8 pt-0 pb-8">
               <a
-                href="https://instacourt-nkgbte2fd-wills-projects-d4e5eaf1.vercel.app"
+                href="https://instacourt-live.vercel.app/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="relative w-full rounded-lg overflow-hidden shadow-sm block cursor-pointer"

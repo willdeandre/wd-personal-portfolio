@@ -3,83 +3,96 @@ import React from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from 'next/navigation';
+import { useIsMobile } from "@/hooks/useIsMobile";
 
-// Helper function to find current page index with sub-route support
-function findCurrentPageIndex(pathname: string, allPages: Array<{path: string, label: string}>): number {
-  // First try exact match
-  const exactMatch = allPages.findIndex(page => page.path === pathname);
+// --- helpers ---
+function findCurrentPageIndex(pathname: string, pages: Array<{path: string, label: string}>): number {
+  const exactMatch = pages.findIndex(p => p.path === pathname);
   if (exactMatch !== -1) return exactMatch;
-  
-  // Then try sub-route match (e.g., /blog/post should match /blog)
-  const subRouteMatch = allPages.findIndex(page => 
-    page.path !== '/' && pathname.startsWith(page.path + '/')
-  );
+  const subRouteMatch = pages.findIndex(p => p.path !== '/' && pathname.startsWith(p.path + '/'));
   return subRouteMatch;
 }
 
-// 1) Container: constrains content width & adds side padding
+const PAGES = [
+  { path: '/', label: 'Home' },
+  { path: '/about', label: 'About' },
+  { path: '/projects', label: 'Projects' },
+  { path: '/blog', label: 'Blog' },
+  { path: '/media', label: 'Media' }
+];
+
+// 1) container keeps horizontal padding; we’ll add top padding via <main> when mobile top bar is present
 export function Container({ children }: { children: React.ReactNode }) {
   return (
-    <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">{children}</div>
+    <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+      {children}
+    </div>
   );
 }
 
-// 2) Header: your site nav
+// 2) MOBILE-ONLY top bar (desktop = none)
 export function Header() {
+  // hide completely on desktop
   return (
-    <header className="bg-white border-b border-muted p-4">
-      <div className="flex justify-end">
-        <div className="w-10 h-10">
-          <Image
-            src="/IMG_5034.png"
-            alt="Will DeAndre"
-            width={40}
-            height={40}
-            className="rounded-full object-cover"
-          />
-        </div>
+    <header className="md:hidden sticky top-0 z-50 bg-white/95 border-b border-muted backdrop-blur">
+      <div className="max-w-6xl mx-auto px-3 py-2 flex items-center gap-3">
+        <Image
+          src="/IMG_5034.png"
+          alt="Will DeAndre"
+          width={32}
+          height={32}
+          className="rounded-full object-cover"
+        />
+        {/* horizontal, thumb-reachable nav */}
+        <MobileTopNav />
       </div>
     </header>
   );
 }
 
-// 3) Left Sidebar - breadcrumb trail (where you've been)
+function MobileTopNav() {
+  const pathname = usePathname();
+  return (
+    <nav className="flex-1 overflow-x-auto no-scrollbar">
+      <div className="flex gap-2">
+        {PAGES.map((p) => {
+          const active = pathname === p.path || (p.path !== "/" && pathname.startsWith(p.path + "/"));
+          return (
+            <Link
+              key={p.path}
+              href={p.path}
+              aria-current={active ? "page" : undefined}
+              className={`shrink-0 px-3 py-1.5 rounded-xl border text-sm ${
+                active ? "bg-primary text-white border-primary" : "bg-white"
+              }`}
+            >
+              {p.label}
+            </Link>
+          );
+        })}
+      </div>
+    </nav>
+  );
+}
+
+// 3) DESKTOP-ONLY side rails (hidden on mobile), truly fixed to viewport
 export function Sidebar() {
   const pathname = usePathname();
-  
-  const getVisitedPages = (currentPath: string) => {
-    const allPages = [
-      { path: '/', label: 'Home' },
-      { path: '/about', label: 'About' },
-      { path: '/projects', label: 'Projects' },
-      { path: '/blog', label: 'Blog' },
-      { path: '/media', label: 'Media' }
-    ];
-    
-    const currentIndex = findCurrentPageIndex(currentPath, allPages);
-    if (currentIndex === -1) return [allPages[0]];
-    return allPages.slice(0, currentIndex + 1);
-  };
-  
-  const visitedPages = getVisitedPages(pathname);
-  
+  const isMobile = useIsMobile();
+  if (isMobile) return null;
+
+  const idx = findCurrentPageIndex(pathname, PAGES);
+  const visited = idx === -1 ? [PAGES[0]] : PAGES.slice(0, idx + 1);
+
   return (
-    <div className="fixed left-0 top-0 h-screen flex z-50">
-      {/* Full-height navigation tabs */}
-      <div className="flex h-screen">
-        {visitedPages.map((page) => {
-          // Determine if this page is currently active
-          const isActive = pathname === page.path || 
-            (page.path !== '/' && pathname.startsWith(page.path + '/'));
-          
+    <div className="fixed inset-y-0 left-0 z-50 flex">
+      <div className="flex h-full">
+        {visited.map((p) => {
+          const active = pathname === p.path || (p.path !== '/' && pathname.startsWith(p.path + '/'));
           return (
-            <Link key={page.path} href={page.path}>
-              <div className={`h-full w-14 flex items-center justify-center transition-colors diagonal-hover ${
-                isActive ? 'bg-primary' : 'bg-gray-700'
-              }`}>
-                <span className="text-white text-sm font-medium transform -rotate-90 whitespace-nowrap">
-                  {page.label}
-                </span>
+            <Link key={p.path} href={p.path}>
+              <div className={`h-full w-14 flex items-center justify-center transition-colors diagonal-hover ${active ? 'bg-primary' : 'bg-gray-700'}`}>
+                <span className="text-white text-sm font-medium -rotate-90 whitespace-nowrap">{p.label}</span>
               </div>
             </Link>
           );
@@ -89,35 +102,21 @@ export function Sidebar() {
   );
 }
 
-// 4) Right Navigation - next pages (where you can go)
 export function RightNav() {
   const pathname = usePathname();
-  
-  const getNextPages = (currentPath: string) => {
-    const allPages = [
-      { path: '/', label: 'Home' },
-      { path: '/about', label: 'About' },
-      { path: '/projects', label: 'Projects' },
-      { path: '/blog', label: 'Blog' },
-      { path: '/media', label: 'Media' }
-    ];
-    
-    const currentIndex = findCurrentPageIndex(currentPath, allPages);
-    if (currentIndex === -1) return allPages.slice(1);
-    return allPages.slice(currentIndex + 1);
-  };
-  
-  const nextPages = getNextPages(pathname);
-  
+  const isMobile = useIsMobile();
+  if (isMobile) return null;
+
+  const idx = findCurrentPageIndex(pathname, PAGES);
+  const nextPages = idx === -1 ? PAGES.slice(1) : PAGES.slice(idx + 1);
+
   return (
-    <div className="fixed right-0 top-0 h-screen flex z-50">
+    <div className="fixed inset-y-0 right-0 z-50 flex">
       <div className="flex h-full">
-        {nextPages.map((page) => (
-          <Link key={page.path} href={page.path}>
+        {nextPages.map((p) => (
+          <Link key={p.path} href={p.path}>
             <div className="h-full w-14 bg-gray-700 flex items-center justify-center transition-colors diagonal-hover">
-              <span className="text-white text-sm font-medium transform rotate-90 whitespace-nowrap">
-                {page.label}
-              </span>
+              <span className="text-white text-sm font-medium rotate-90 whitespace-nowrap">{p.label}</span>
             </div>
           </Link>
         ))}
@@ -126,59 +125,46 @@ export function RightNav() {
   );
 }
 
-// 5) Footer: simple bottom bar
-export function Footer() {
-  return (
-    <footer className="mt-8 border-t border-muted py-4 bg-honeydew">
-      <div className="text-center text-sm text-primary/70">
-        © {new Date().getFullYear()} Will DeAndre
-      </div>
-    </footer>
-  );
-}
-
-function getMarginClass(tabCount: number, side: 'left' | 'right'): string {
-  const prefix = side === 'left' ? 'ml-' : 'mr-';
-  const marginMap: { [key: number]: string } = {
-    0: '0',
-    1: '14',
-    2: '28',
-    3: '42',
-    4: '56',
-    5: '70'
-  };
-  return prefix + (marginMap[tabCount] || '0');
-}
-
+// 5) Layout: no perspective on outer wrapper (keeps rails truly fixed). Add top padding only on mobile.
 export function Layout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
+  const isMobile = useIsMobile();
 
-  const allPages = [
-    { path: '/', label: 'Home' },
-    { path: '/about', label: 'About' },
-    { path: '/projects', label: 'Projects' },
-    { path: '/blog', label: 'Blog' },
-    { path: '/media', label: 'Media' }
-  ];
+  const idx = findCurrentPageIndex(pathname, PAGES);
+  const leftTabs = idx === -1 ? 1 : idx + 1;
+  const rightTabs = idx === -1 ? PAGES.length - 1 : PAGES.length - idx - 1;
 
-  const currentIndex = findCurrentPageIndex(pathname, allPages);
-  const leftTabs = currentIndex === -1 ? 1 : currentIndex + 1;
-  const rightTabs = currentIndex === -1 ? 4 : allPages.length - currentIndex - 1;
+  const TAB_W = 56; // w-14
+  const leftOffset = leftTabs * TAB_W;
+  const rightOffset = rightTabs * TAB_W;
 
-  const leftMarginClass = getMarginClass(leftTabs, 'left');
-  const rightMarginClass = getMarginClass(rightTabs, 'right');
+  // height of mobile top bar we just created:
+  const MOBILE_TOP_H = 56; // ~p-2 + avatar + nav (tweak if needed)
 
   return (
-    <div className="min-h-screen bg-[#E5F4E3]" style={{ perspective: "1200px" }}>
+    <div className="min-h-screen bg-[#E5F4E3]">
+      {/* mobile-only top bar nav */}
       <Header />
+
+      {/* desktop-only rails */}
       <Sidebar />
       <RightNav />
-      <main className={`${leftMarginClass} ${rightMarginClass}`}>
-        <Container>
+
+      <main
+        // desktop margins reserve space for rails; on mobile we remove them and add top padding under the header
+        style={{
+          marginLeft: isMobile ? 0 : leftOffset,
+          marginRight: isMobile ? 0 : rightOffset,
+          paddingTop: isMobile ? MOBILE_TOP_H : 0,
+          // no bottom padding; we removed the bottom bar entirely
+        }}
+      >
+        {/* give the content any 3D transforms without affecting fixed rails */}
+        <div style={{ perspective: "1200px" }}>
           {children}
-        </Container>
+        </div>
       </main>
-      <Footer />
+
     </div>
   );
 }

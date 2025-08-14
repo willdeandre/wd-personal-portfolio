@@ -136,7 +136,7 @@ export async function generateMetadata({ params }: BlogPostProps): Promise<Metad
     const typedData = data as BlogPostData;
 
     return {
-      title: `${typedData.title} | Will DeAndre Basketball Analytics`,
+      title: `${typedData.title}`,
       description: typedData.description || `Basketball analytics insights by Will DeAndre`,
       openGraph: {
         title: typedData.title,

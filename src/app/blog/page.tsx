@@ -31,16 +31,16 @@ interface BlogData {
 
 // Generate metadata for SEO
 export const metadata: Metadata = {
-  title: 'Basketball Analytics Blog | Will DeAndre',
-  description: 'Deep dives into basketball analytics, data visualization, and the intersection of sports and technology. Expert analysis and insights.',
+  title: 'Blog | Will DeAndre',
+  description: 'More coming soon!',
   openGraph: {
-    title: 'Basketball Analytics Blog | Will DeAndre',
-    description: 'Expert basketball analytics insights and data-driven analysis',
+    title: 'Blog | Will DeAndre',
+    description: 'Basketball insights and data-driven analysis',
     type: 'website',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Basketball Analytics Blog | Will DeAndre',
+    title: 'Blog | Will DeAndre',
     description: 'Expert basketball analytics insights and data-driven analysis',
   },
 };
@@ -214,16 +214,13 @@ export default function BlogIndex() {
   const regularPosts = posts.filter(post => post.slug !== featuredPost?.slug);
 
   return (
-    <div className="py-8 bg-[#E5F4E3]">
-      <div className="max-w-3xl ml-70 px-6">
+    <div className="py-8">
+      <div className="max-w-3xl mx-auto">
         {/* Compact Header */}
         <div className="mb-12">
 
           <h1 className="text-4xl font-bold text-black mb-4">Analytics & Insights</h1>
           
-          <p className="text-xl text-gray-700 max-w-3xl leading-relaxed">
-            Deep dives into basketball analytics, data visualization, and the intersection of sports and technology.
-          </p>
         </div>
 
         {/* Featured Post */}

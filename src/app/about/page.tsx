@@ -67,8 +67,8 @@ export default function About() {
   ];
 
   return (
-    <section className="py-8 bg-[#E5F4E3]">
-      <div className="container mx-auto px-6 pr-20">
+    <section className="py-8 px-8">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Top Section: Skill Boxes + Photo */}
         <div className="flex flex-col md:flex-row items-center gap-12 mb-16">
           {/* Skills Boxes */}
@@ -109,7 +109,7 @@ export default function About() {
               {/* Corner frame accents */}
               <div className="absolute inset-0 overflow-hidden">
                 {/* Top corners */}
-                <div className="absolute top-3 left-3 w-8 h-8 border-l-3 border-t-3 border-white/60"></div>
+                <div className="absolute top-3 left-3 w-8 h-8 border-l-[3px] border-t-[3px] border-white/60"></div>
                 <div className="absolute top-3 right-3 w-8 h-8 border-r-3 border-t-3 border-white/60"></div>
                 
                 {/* Bottom corners */}

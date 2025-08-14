@@ -69,7 +69,7 @@ const instagrams = [
 
 export default function MediaPage() {
   return (
-    <div className="min-h-screen" style={{ backgroundColor: '#E5F4E3' }}>
+    <div className="min-h-screen">
       <style jsx>{`
         .flip-card-container {
           perspective: 1000px;
@@ -81,7 +81,7 @@ export default function MediaPage() {
           position: relative;
           width: 100%;
           height: 100%;
-          transition: transform 0.6s ease-in-out, scale 0.3s ease-in-out;
+          transition: transform 0.4s ease-in-out, scale 0.2s ease-in-out;
           transform-style: preserve-3d;
         }
 
@@ -111,7 +111,7 @@ export default function MediaPage() {
           background-color: #f8fafc;
         }
 `}</style>
-      <main className="max-w-6xl mx-auto py-8 px-4" style={{ paddingLeft: '290px' }}>
+      <main className="py-8 px-16">
         <h1 className="text-4xl font-bold text-center mb-12 text-black">Media & Recommendations</h1>
 
         {/* Books Section */}

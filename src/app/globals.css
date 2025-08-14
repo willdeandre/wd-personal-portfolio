@@ -31,6 +31,12 @@
   }
 }
 
+/* === Global resets to remove default browser spacing === */
+html, body { 
+  padding: 0;
+  margin: 0; /* removes the default 8px body margin */
+}
+
 body {
   background: var(--background);
   color: var(--foreground);
@@ -89,10 +95,18 @@ a:hover {
   opacity: 1 !important;
 }
 
-/* Remove the ::before pseudo-element since we don't need it for stripes */
 .diagonal-hover:hover::before {
   display: none;
 }
+
+/* Neutralize diagonal-hover transforms on small screens (future-proof) */
+@media (max-width: 767px) {
+  .diagonal-hover { transform: none !important; }
+}
+
+/* Hide scrollbar on elements using .no-scrollbar */
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
 
 /* Court Border Drawing Animation */
 .photo-container-court {

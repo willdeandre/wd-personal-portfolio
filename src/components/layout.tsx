@@ -142,7 +142,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
   const MOBILE_TOP_H = 56; // ~p-2 + avatar + nav (tweak if needed)
 
   return (
-    <div className="min-h-screen bg-[#E5F4E3]">
+    <div className="min-h-screen bg-[#6D8196]">
       {/* mobile-only top bar nav */}
       <Header />
 

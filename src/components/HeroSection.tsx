@@ -26,7 +26,7 @@ export default function Home() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-[#E5F4E3] text-[#003F91]">
+    <div className="min-h-screen bg-[#6D8196] text-[#003F91]">
       {/* Add custom CSS for diagonal hover effect */}
       <style jsx>{`
         .diagonal-hover:hover {

@@ -159,3 +159,9 @@ a:hover {
     clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
   }
 }
+
+/* Add this to your global stylesheet */
+.text-outline-white {
+  -webkit-text-stroke: 1px white; /* for Chrome/Safari */
+  text-stroke: 1px white;          /* for others */
+}

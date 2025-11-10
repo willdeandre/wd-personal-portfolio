@@ -48,10 +48,10 @@ export default function Home() {
         <div className="max-w-6xl mx-auto text-center">
           <div className={`transition-all duration-[1500ms] ${isLoaded ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
             <h1 className="text-7xl lg:text-9xl font-geist mb-8 leading-none">
-              <span className="block text-transparent bg-clip-text bg-gradient-to-r from-[#003F91] via-[#5DA9E9] to-[#6D326D]">
+              <span className="block text-transparent bg-clip-text bg-gradient-to-r from-[#003F91] via-[#5DA9E9] to-[#6D326D] text-outline-white">
                 Will
               </span>
-              <span className="block text-transparent bg-clip-text bg-gradient-to-r from-[#6D326D] via-[#5DA9E9] to-[#003F91] -mt-4">
+              <span className="block text-transparent bg-clip-text bg-gradient-to-r from-[#6D326D] via-[#5DA9E9] to-[#003F91] -mt-4 text-outline-white">
                 DeAndre
               </span>
             </h1>
@@ -92,7 +92,7 @@ export default function Home() {
       </section>
 
       {/* Featured Work Section */}
-      <section className="relative py-32 bg-[#E5F4E3]">
+      <section className="relative py-32 bg-[#6D8196]">
         <div className="max-w-6xl mx-auto px-6">
           <h2 className="text-5xl font-bold mb-4 text-center">
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#003F91] to-[#5DA9E9]">

@@ -4,7 +4,7 @@ import { ArrowRight } from "lucide-react";
 
 export default function Projects() {
   return (
-    <div className="min-h-screen" style={{ backgroundColor: '#F0FFF0' }}>
+    <div className="min-h-screen" style={{ backgroundColor: '#6D8196' }}>
       {/* Add custom CSS for diagonal hover effect */}
       <style jsx>{`
         .diagonal-hover:hover {

@@ -5,7 +5,7 @@ module.exports = {
     extend: {
       colors: {
         // Your color palette
-        honeydew: "#E5F4E3",
+        honeydew: "#6D8196", // 
         "argentinian-blue": "#5DA9E9",
         "marian-blue": "#003F91",
         white: "#FFFFFF",
@@ -15,14 +15,14 @@ module.exports = {
         secondary: "#5DA9E9", // argentinian-blue
         accent: "#6D326D", // finn
         background: "#FFFFFF", // white
-        muted: "#E5F4E3", // honeydew
+        muted: "#6D8196", // honeydew
         text: "#111827", // keep your existing text color
       },
       fontFamily: {
         sans: ["var(--font-geist-sans)", "ui-sans-serif", "system-ui"],
         mono: ["var(--font-geist-mono)", "ui-monospace", "SFMono-Regular"],
         bebas: ["var(--font-bebas-neue)"],
-        jetbrains: ["var(--font-jetbrains-mono)", "ui-monospace", "SFMono-Regular"], // Add this line
+        inter: ["var(--font-inter)", "sans-serif"],
       },
       spacing: {
         72: "18rem",

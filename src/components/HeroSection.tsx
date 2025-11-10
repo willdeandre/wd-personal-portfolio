@@ -47,18 +47,11 @@ export default function Home() {
       <section className="relative min-h-screen flex items-center justify-center">
         <div className="max-w-6xl mx-auto text-center">
           <div className={`transition-all duration-[1500ms] ${isLoaded ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
-            <h1 className="relative text-7xl lg:text-9xl font-geist mb-8 leading-none">
-              <span className="absolute inset-0 text-transparent text-outline-white">
+            <h1 className="text-7xl lg:text-9xl font-geist mb-8 leading-none">
+              <span className="block text-transparent bg-clip-text bg-gradient-to-r from-[#003F91] via-[#5DA9E9] to-[#6D326D] text-outline-white">
                 Will
               </span>
-              <span className="block text-transparent bg-clip-text bg-gradient-to-r from-[#003F91] via-[#5DA9E9] to-[#6D326D]">
-                Will
-              </span>
-
-              <span className="absolute inset-0 text-transparent text-outline-white -mt-4">
-                DeAndre
-              </span>
-              <span className="block text-transparent bg-clip-text bg-gradient-to-r from-[#6D326D] via-[#5DA9E9] to-[#003F91] -mt-4">
+              <span className="block text-transparent bg-clip-text bg-gradient-to-r from-[#6D326D] via-[#5DA9E9] to-[#003F91] -mt-4 text-outline-white">
                 DeAndre
               </span>
             </h1>

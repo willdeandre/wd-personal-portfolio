@@ -162,6 +162,6 @@ a:hover {
 
 /* Add this to your global stylesheet */
 .text-outline-white {
-  -webkit-text-stroke: 1px white; /* for Chrome/Safari */
-  text-stroke: 1px white;          /* for others */
+  -webkit-text-stroke: 2px white; /* for Chrome/Safari */
+  text-stroke: 2px white;          /* for others */
 }
